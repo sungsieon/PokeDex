@@ -1,0 +1,61 @@
+* {
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+}
+
+.navbar {
+    position: sticky;
+    top: 0px;
+    max-width:1700px;
+    margin:0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height:5rem;
+    padding: 20px 2rem;
+}
+
+.left_navbar img{
+    cursor: pointer;
+    width:100%;
+}
+
+.right_navbar {
+    display:flex;
+    align-items: center;
+    gap:10px;
+}
+
+.right_navbar span {
+    width:45px;
+    height:45px;
+    font-size:18px;
+    font-weight:600;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sunBox{
+    width:45px;
+    height:45px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.right_navbar span:hover {
+    border:none;
+    background-color: rgb(239, 239, 239);
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.sunBox:hover {
+    border:none;
+    background-color: rgb(239, 239, 239);
+    border-radius: 50px;
+    cursor: pointer;
+}
