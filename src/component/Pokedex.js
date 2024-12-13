@@ -40,14 +40,8 @@ export default function Pokedex(){
 
        fetchData();
     },[])
-
-    if(pokemonList.length > 0){
-        console.log(pokemonList[0])
-    }
-    
-
    
-   const num = 1;
+   
 
    const pokedexBox = pokemonList.map((pokemon, index) => {
 
@@ -58,13 +52,15 @@ export default function Pokedex(){
        <>
        <div className="pokedexBox">
        <span>no.{num}</span><br></br>
-       <span>{pokemonList.name}</span>
+       <h1 className="pokeName">{pokemon.name}</h1>
+       <span className="type">{pokemon.types}</span>
+       <img className="Image" src={pokemon.image}/>
        </div>
-       
+
        </>
       )
    })
-
+ 
    
      
     return(
