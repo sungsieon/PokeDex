@@ -1,0 +1,11 @@
+.blackBackground {
+  background-color: #222;
+  transition: 0.6s ease;
+  min-height: 980px;
+}
+
+.whiteBackground {
+  background-color: white;
+  transition: 0.6s ease;
+  height: 100%;
+}

@@ -1,127 +1,157 @@
 * {
-    box-sizing: border-box;
-    margin:0;
-    padding:0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 .main {
-    max-width:1200px;
-    margin:0 auto;
-    padding:0px 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0px 2rem;
 }
 
 .mainLogo {
-    display:flex;
-    justify-content: center;
-   width:100%;
-   
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
-.mainLogo img{
-  width:100%;
-  max-width:30rem;
+.mainLogo img {
+  width: 100%;
+  max-width: 30rem;
 }
 
 .searchBox {
-    position:relative;
-    
-    height:4rem;
-    
+  position: relative;
+
+  height: 4rem;
 }
 
 .searchBox input {
-    width:100%;
-    height:4rem;
-    margin:2rem auto;
-    display:block;
-    border:none;
-    border-radius:10px;
-    box-shadow:rgba(0, 0, 0, 0.1) -4px 4px 15px 0px;
-    padding: 0px 20px 0px 50px;
-    font-size:18px;
+  width: 100%;
+  height: 4rem;
+  margin: 2rem auto;
+  display: block;
+  border: none;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) -4px 4px 15px 0px;
+  padding: 0px 20px 0px 50px;
+  font-size: 18px;
 }
 
 .searchBox svg {
-    position:absolute;
-    top:30%;
-    left:15px;
-    width:1.5rem;
+  position: absolute;
+  top: 30%;
+  left: 15px;
+  width: 1.5rem;
 }
 
-
-
 .pokedex {
-    display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    gap:10px;
-    margin:6rem auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 6rem auto;
 }
 
 .pokedexBox {
-    position:relative;
-    width:100%;
-    height:220px;
-    border:1px solid black;
-    border-radius:10px;
-    padding:20px;
-    box-shadow: rgba(0, 0, 0, 0.1) 4px 4px 20px 0px;
+  position: relative;
+  width: 100%;
+  height: 220px;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.1) 4px 4px 20px 0px;
+  background-color: white;
+}
+
+.pokedexBox:hover,
+.blackBox:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  transform-origin: bottom;
+  transition: 0.5s ease;
+  z-index: 10;
+}
+
+.blackBox {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.1) 4px 4px 20px 0px;
+  background-color: #444444;
+}
+
+.blackNumber,
+.whiteName {
+  color: white;
 }
 
 .type {
-    border:1px solid black;
-    border-radius:20px;
-    color:white;
-    background-color: black;
-    font-size:13px;
-    padding:5px;
-    margin-top:0.3rem;
-    display:block;
-    width: fit-content;
+  border: 1px solid black;
+  border-radius: 20px;
+  color: white;
+  background-color: black;
+  font-size: 13px;
+  padding: 5px;
+  margin-top: 0.3rem;
+  display: block;
+  width: fit-content;
+}
+
+.typeBox {
+  display: flex;
+  gap: 0.3rem;
 }
 
 .Image {
-    position:absolute;
-    width:6rem;
-    bottom:1rem;
-    right:7%;
+  position: absolute;
+  width: 6rem;
+  bottom: 1rem;
+  right: 7%;
 }
 
-@media (max-width:958px){
-    .main {
-        padding:0px 0rem;
-    }
+@media (max-width: 958px) {
+  .main {
+    padding: 0px 0rem;
+  }
 }
 
-@media (max-width:900px){
-    .pokedex {
-        display:grid;
-        grid-template-columns:repeat(3, 1fr);
-        gap:10px;
-        margin:6rem auto;
-    }
+@media (max-width: 900px) {
+  .pokedex {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 6rem auto;
+  }
 
-    .main {
-        padding:0px 2rem;
-    }
+  .main {
+    padding: 0px 2rem;
+  }
 }
 
-@media (max-width:740px){
-    .pokedex {
-        display:grid;
-        grid-template-columns:repeat(2, 1fr);
-        gap:10px;
-        margin:6rem auto;
-        width:100%;
-    }
+@media (max-width: 740px) {
+  .pokedex {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 6rem auto;
+    width: 100%;
+  }
 }
 
-@media (max-width:522px){
+@media (max-width: 522px) {
+  .pokeName {
+    font-size: 22px;
+  }
 
-    .pokeName {
-        font-size:22px;
-    }
+  .pokedexBox {
+    overflow: hidden;
+  }
 
-    .pokedexBox {
-        overflow: hidden;
-    }
+  .blackBox {
+    overflow: hidden;
+  }
 }
