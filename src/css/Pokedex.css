@@ -70,7 +70,6 @@
   transform: scale(1.05);
   transform-origin: bottom;
   transition: 0.5s ease;
-  z-index: 10;
 }
 
 .blackBox {
@@ -113,6 +112,82 @@
   right: 7%;
 }
 
+.hidden {
+  display: none;
+}
+
+.fullBox {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.6);
+  inset: 0px;
+}
+
+.innerBox {
+  position: relative;
+  width: 700px;
+  height: 600px;
+  margin: 10rem auto;
+  background-color: white;
+  border: 5px solid black;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+}
+
+.closeBtn {
+  cursor: pointer;
+  position: absolute;
+  top: 1px;
+  right: 10px;
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+.colorBg {
+  width: 100%;
+  height: 65%;
+  background-color: yellow;
+  padding-top: 5rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pokename {
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+.colorBg img {
+  width: 17rem;
+}
+
+.innerImg {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.innerImg img {
+  width: 100%;
+}
+
+.leftImg {
+  width: 15rem;
+}
+
+.rightImg {
+  width: 15rem;
+}
+
+.innerNum {
+  padding: 0.3rem 0.8rem 0.3rem 0.8rem;
+  background-color: black;
+  color: white;
+  border-radius: 40px;
+}
+
 @media (max-width: 958px) {
   .main {
     padding: 0px 0rem;
@@ -138,6 +213,12 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     margin: 6rem auto;
+    width: 100%;
+  }
+}
+
+@media (max-width: 700px) {
+  .innerBox {
     width: 100%;
   }
 }

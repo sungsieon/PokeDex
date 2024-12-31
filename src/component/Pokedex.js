@@ -6,7 +6,10 @@ import React from "react";
 export default function Pokedex({ changeLanguage, changeBright, inputValue }) {
   const [data, setData] = useState([]);
   const [pokemonList, setPokemonList] = useState([]);
+  const [selectedPokemon, setSelectedPokemon] = useState(null);
+  const [inner, setInner] = useState(true);
 
+  //pokemon API
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -33,9 +36,10 @@ export default function Pokedex({ changeLanguage, changeBright, inputValue }) {
           pokemonData.push({
             name,
             koname: koreanName,
-            image: sprites.front_default, // 포켓몬 이미지
-            types: types.map((type) => type.type.name), // 포켓몬 타입
-            abilities: abilities.map((ability) => ability.ability.name), // 포켓몬 능력
+            image: sprites.front_default,
+            types: types.map((type) => type.type.name),
+            abilities: abilities.map((ability) => ability.ability.name),
+            back_default: sprites.back_default,
           });
         }
 
@@ -47,7 +51,9 @@ export default function Pokedex({ changeLanguage, changeBright, inputValue }) {
 
     fetchData();
   }, []);
+  //-------------------------------------------------------------------------------
 
+  // pokeBox
   const filterPokemon = pokemonList.filter((pokemon) => {
     return (
       pokemon.name.toLowerCase().includes(inputValue.toLowerCase()) ||
@@ -58,9 +64,18 @@ export default function Pokedex({ changeLanguage, changeBright, inputValue }) {
   const pokedexBox = filterPokemon.map((pokemon, index) => {
     const num = index + 1;
 
+    const pokeBoxClick = (pokemon, index) => {
+      const updatedPokemon = { ...pokemon, num };
+      setSelectedPokemon(updatedPokemon);
+      setInner(true);
+    };
+
     return (
       <>
-        <div className={changeBright ? "blackBox" : "pokedexBox"}>
+        <div
+          onClick={() => pokeBoxClick(pokemon)}
+          className={changeBright ? "blackBox" : "pokedexBox"}
+        >
           <span className={changeBright ? "blackNumber" : "whiteNumber"}>
             no.{num}
           </span>
@@ -80,10 +95,45 @@ export default function Pokedex({ changeLanguage, changeBright, inputValue }) {
       </>
     );
   });
+  //--------------------------------------------------------------------------
+
+  //innerBox
+
+  const handleBtn = () => {
+    setInner(false);
+  };
+
+  const innerBox = selectedPokemon ? (
+    <div className={inner ? "fullBox" : "hidden"}>
+      <div className="innerBox">
+        <span onClick={handleBtn} className="closeBtn">
+          X
+        </span>
+        <div className="colorBg">
+          <span className="innerNum">
+            no.{selectedPokemon ? selectedPokemon.num : ""}
+          </span>
+          <span className="pokename">{selectedPokemon.koname}</span>
+          <div className="innerImg">
+            <div className="leftImg">
+              <img src={selectedPokemon.image} />
+            </div>
+            <div className="rightImg">
+              <img src={selectedPokemon.back_default} />
+            </div>
+          </div>
+        </div>
+        <div className="whiteBg"></div>
+      </div>
+    </div>
+  ) : (
+    <></>
+  );
 
   return (
     <>
       <div className="pokedex">{pokedexBox}</div>
+      <div>{innerBox}</div>
     </>
   );
 }
