@@ -23,7 +23,7 @@ export default function Pokedex({ changeLanguage, changeBright, inputValue }) {
 
         for (let i = 0; i < pokemonUrls.length; i++) {
           const pokemonDetails = await axios.get(pokemonUrls[i].url);
-          const { name, sprites, types, abilities } = pokemonDetails.data;
+          const { name, sprites, types, abilities, height, weight } = pokemonDetails.data;
 
           const speciesDetails = await axios.get(
             pokemonDetails.data.species.url
@@ -33,6 +33,14 @@ export default function Pokedex({ changeLanguage, changeBright, inputValue }) {
               (nameObj) => nameObj.language.name === "ko"
             )?.name || name;
 
+            const descriptionObj = speciesDetails.data.flavor_text_entries.find(
+              (entry) => entry.language.name === "ko" // 한국어 설명 찾기
+            ) || speciesDetails.data.flavor_text_entries.find(
+              (entry) => entry.language.name === "en" // 한국어 설명이 없으면 영어 설명 사용
+            );
+    
+            const description = descriptionObj ? descriptionObj.flavor_text : "설명이 없습니다.";
+
           pokemonData.push({
             name,
             koname: koreanName,
@@ -40,6 +48,9 @@ export default function Pokedex({ changeLanguage, changeBright, inputValue }) {
             types: types.map((type) => type.type.name),
             abilities: abilities.map((ability) => ability.ability.name),
             back_default: sprites.back_default,
+            height: (height/10).toFixed(1),
+            weight: (weight/10).toFixed(1),
+            description,
           });
         }
 
@@ -123,7 +134,31 @@ export default function Pokedex({ changeLanguage, changeBright, inputValue }) {
             </div>
           </div>
         </div>
-        <div className="whiteBg"></div>
+        <div className="whiteBg">
+          <div className="pokemonInformation">
+            <div className="typeInformation">
+              <span className="infoType">타입</span>
+              <div className="typeBox">
+              {selectedPokemon.types.map((type, key) => (
+              <span key={key} className="type2">
+                {type}
+              </span>
+            ))}
+             </div>
+            </div>                            
+            <div className="heightInformation">
+              <span className="height">키</span>
+              <span>{selectedPokemon.height}m</span>
+            </div>
+            <div className="weightInformation">
+              <span className="weight">몸무게</span>
+              <span>{selectedPokemon.weight}kg</span>
+            </div>
+          </div>
+          <div>
+            <span className="description">{selectedPokemon.description}</span>
+          </div>
+        </div>
       </div>
     </div>
   ) : (
