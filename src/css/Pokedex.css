@@ -143,9 +143,10 @@
   height: 600px;
   margin: 10rem auto;
   background-color: white;
-  border: 5px solid black;
+  border-radius:10px;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .closeBtn {
@@ -296,5 +297,15 @@
 
   .blackBox {
     overflow: hidden;
+  }
+}
+
+@media (max-width: 500px){
+  .pokemonInformation{
+    width:100%;
+  }
+
+  .description{
+    width:100%;
   }
 }
