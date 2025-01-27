@@ -120,7 +120,23 @@ export default function Pokedex({ changeLanguage, changeBright, inputValue }) {
         <span onClick={handleBtn} className="closeBtn">
           X
         </span>
-        <div className="colorBg">
+        <div   className={`
+    ${selectedPokemon.types.includes('grass') ? 'glassBg' :''}
+    ${selectedPokemon.types.includes('fire') ? 'fireBg' : ''}
+    ${selectedPokemon.types.includes('water') ? 'waterBg' : ''}
+    ${selectedPokemon.types.includes('poison') ? 'poisonBg' : ''}
+    ${selectedPokemon.types.includes('psychic') ? 'psychicBg' : ''}
+    ${selectedPokemon.types.includes('electric') ? 'electricBg' : ''}
+    ${selectedPokemon.types.includes('dragon') ? 'dragonBg' : ''}
+    ${selectedPokemon.types.includes('normal') ? 'normalBg' : ''}
+    ${selectedPokemon.types.includes('bug') ? 'bugBg' : ''}
+    ${selectedPokemon.types.includes('ice') ? 'iceBg' : ''}
+    ${selectedPokemon.types.includes('ground') ? 'groundBg' : ''}
+    ${selectedPokemon.types.includes('fairy') ? 'fairyBg' : ''}
+    ${selectedPokemon.types.includes('fighting') ? 'fightingBg' : ''}
+     ${selectedPokemon.types.includes('rock') ? 'rockBg' : ''}
+    // 여기에 다른 속성에 맞는 조건 추가
+  `}>
           <span className="innerNum">
             no.{selectedPokemon ? selectedPokemon.num : ""}
           </span>
@@ -130,7 +146,7 @@ export default function Pokedex({ changeLanguage, changeBright, inputValue }) {
               <img src={selectedPokemon.image} />
             </div>
             <div className="rightImg">
-              <img src={selectedPokemon.back_default} />
+              <img src={selectedPokemon.back_default} />  
             </div>
           </div>
         </div>

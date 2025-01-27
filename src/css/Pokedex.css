@@ -161,12 +161,164 @@
 .colorBg {
   width: 100%;
   height: 65%;
-  background-color: yellow;
   padding-top: 5rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+}
+
+.glassBg{
+  width: 100%;
+  height: 65%;
+  padding-top: 5rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: green;
+}
+
+.fireBg{
+  width: 100%;
+  height: 65%;
+  padding-top: 5rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: red;
+}
+
+.waterBg{
+  width: 100%;
+  height: 65%;
+  padding-top: 5rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: blue;
+}
+
+.poisonBg{
+  width: 100%;
+  height: 65%;
+  padding-top: 5rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: purple;
+}
+
+.psychicBg{
+  width: 100%;
+  height: 65%;
+  padding-top: 5rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: orange;
+}
+
+.electricBg{
+  width: 100%;
+  height: 65%;
+  padding-top: 5rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: yellow;
+}
+
+.dragonBg{
+  width: 100%;
+  height: 65%;
+  padding-top: 5rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: skyblue;
+}
+
+.normalBg{  width: 100%;
+  height: 65%;
+  padding-top: 5rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color:brown;
+}
+
+.bugBg{
+  width: 100%;
+  height: 65%;
+  padding-top: 5rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(222, 175, 55);
+}
+
+.iceBg{
+  width: 100%;
+  height: 65%;
+  padding-top: 5rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(115, 207, 243);
+}
+
+.groundBg{
+  width: 100%;
+  height: 65%;
+  padding-top: 5rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column; 
+  align-items: center;
+  background-color: rgb(85, 74, 62);
+}
+
+.fairyBg{
+  width: 100%;
+  height: 65%;
+  padding-top: 5rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column; 
+  align-items: center;
+  background-color: rgb(224, 145, 245);
+}
+
+.fightingBg{
+  width: 100%;
+  height: 65%;
+  padding-top: 5rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column; 
+  align-items: center;
+  background-color: rgba(221, 211, 224, 0.767);
+}
+
+.rockBg{
+  width: 100%;
+  height: 65%;
+  padding-top: 5rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column; 
+  align-items: center;
+  background-color: rgba(78, 69, 58, 0.767);
 }
 
 .pokename {
