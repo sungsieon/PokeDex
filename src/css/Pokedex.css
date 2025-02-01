@@ -106,7 +106,7 @@
   color: black;
   background-color: white;
   font-size: 13px;
-  padding:3px;
+  padding: 3px;
   display: block;
   width: fit-content;
 }
@@ -132,7 +132,7 @@
   background-color: rgba(0, 0, 0, 0.6);
   inset: 0px;
   z-index: 55;
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -143,7 +143,7 @@
   height: 600px;
   margin: 10rem auto;
   background-color: white;
-  border-radius:10px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -168,7 +168,7 @@
   align-items: center;
 }
 
-.glassBg{
+.glassBg {
   width: 100%;
   height: 65%;
   padding-top: 5rem;
@@ -179,7 +179,7 @@
   background-color: #cce6cc !important;
 }
 
-.fireBg{
+.fireBg {
   width: 100%;
   height: 65%;
   padding-top: 5rem;
@@ -190,7 +190,7 @@
   background-color: #ffcccc;
 }
 
-.waterBg{
+.waterBg {
   width: 100%;
   height: 65%;
   padding-top: 5rem;
@@ -198,10 +198,10 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background-color:#ccccff;
+  background-color: #ccccff;
 }
 
-.poisonBg{
+.poisonBg {
   width: 100%;
   height: 65%;
   padding-top: 5rem;
@@ -212,7 +212,7 @@
   background-color: #e6cce6;
 }
 
-.psychicBg{
+.psychicBg {
   width: 100%;
   height: 65%;
   padding-top: 5rem;
@@ -223,7 +223,7 @@
   background-color: #edd4d4;
 }
 
-.electricBg{
+.electricBg {
   width: 100%;
   height: 65%;
   padding-top: 5rem;
@@ -234,7 +234,7 @@
   background-color: #ffffcc;
 }
 
-.dragonBg{
+.dragonBg {
   width: 100%;
   height: 65%;
   padding-top: 5rem;
@@ -245,17 +245,18 @@
   background-color: #ccccff;
 }
 
-.normalBg{  width: 100%;
+.normalBg {
+  width: 100%;
   height: 65%;
   padding-top: 5rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background-color:#cccccc;
+  background-color: #cccccc;
 }
 
-.bugBg{
+.bugBg {
   width: 100%;
   height: 65%;
   padding-top: 5rem;
@@ -266,7 +267,7 @@
   background-color: #cce6cc;
 }
 
-.iceBg{
+.iceBg {
   width: 100%;
   height: 65%;
   padding-top: 5rem;
@@ -277,46 +278,46 @@
   background-color: #ccccff;
 }
 
-.groundBg{
+.groundBg {
   width: 100%;
   height: 65%;
   padding-top: 5rem;
   display: flex;
   justify-content: center;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: center;
   background-color: #e6e6e6;
 }
 
-.fairyBg{
+.fairyBg {
   width: 100%;
   height: 65%;
   padding-top: 5rem;
   display: flex;
   justify-content: center;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: center;
   background-color: #fff2f5;
 }
 
-.fightingBg{
+.fightingBg {
   width: 100%;
   height: 65%;
   padding-top: 5rem;
   display: flex;
   justify-content: center;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: center;
   background-color: #e6e6e6;
 }
 
-.rockBg{
+.rockBg {
   width: 100%;
   height: 65%;
   padding-top: 5rem;
   display: flex;
   justify-content: center;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: center;
   background-color: rgba(78, 69, 58, 0.767);
 }
@@ -355,52 +356,52 @@
   border-radius: 40px;
 }
 
-.pokemonInformation{
-  width:500px;
-  height:100px;
-  margin:0 auto;
-  background-color:#fff;
+.pokemonInformation {
+  width: 500px;
+  height: 100px;
+  margin: 0 auto;
+  background-color: #fff;
   border: 1px solid white;
-  border-radius:10px;
+  border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.1) 4px 4px 20px 0px;
-  display:grid;
-  grid-template-columns: repeat(3, minmax(0px,1fr));
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0px, 1fr));
 }
 
-.typeInformation{
-  display:flex;
-  flex-direction:column;
+.typeInformation {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.heightInformation{
-  display:flex;
-  flex-direction:column;
+.heightInformation {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.weightInformation{
-  display:flex;
-  flex-direction:column;
+.weightInformation {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.description{
-  display:flex;
-  width:500px;
+.description {
+  display: flex;
+  width: 500px;
   margin: 2rem auto;
   justify-content: center;
-  font-size:13px;
-  font-weight:500;
+  font-size: 13px;
+  font-weight: 500;
 }
 
 .infoType,
 .height,
-.weight{
-  margin-bottom:10px;
+.weight {
+  margin-bottom: 10px;
 }
 
 @media (max-width: 958px) {
@@ -452,12 +453,12 @@
   }
 }
 
-@media (max-width: 500px){
-  .pokemonInformation{
-    width:100%;
+@media (max-width: 500px) {
+  .pokemonInformation {
+    width: 100%;
   }
 
-  .description{
-    width:100%;
+  .description {
+    width: 100%;
   }
 }

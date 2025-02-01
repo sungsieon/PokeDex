@@ -12,87 +12,92 @@ export default function Pokedex({ changeLanguage, changeBright, inputValue }) {
   const [loading, setLoading] = useState(false);
   const [offset, setOffset] = useState(0);
   const [limit, setLimit] = useState(20);
-  const [count, setCount] = useState(0);
+  
 
   //pokemon API
-  
+
   useEffect(() => {
+    const fetchData = async () => {
+      if (loading) return; // 중복 요청 방지
 
-const fetchData = async () => {
-  if (loading) return; // 중복 요청 방지
+      setLoading(true);
 
-  setLoading(true);
+      try {
+        const response = await axios.get(
+          `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=150`
+        );
+        const pokeData = response.data;
+        const pokemonUrls = response.data.results;
 
-    try {
-      const response = await axios.get(
-        `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=150`
-      );
-      const pokeData = response.data;
-      const pokemonUrls = response.data.results;
-      const pokemonData = [];
+        const pokemonDetailsArray = await Promise.all(
+          pokemonUrls.map((pokemon) => axios.get(pokemon.url))
+        );
 
-      for (let i = 0; i < pokemonUrls.length; i++) {
-        const pokemonDetails = await axios.get(pokemonUrls[i].url);
-        const { name, sprites, types, abilities, height, weight } =
-          pokemonDetails.data;
+        const speciesDetailsArray = await Promise.all(
+          pokemonDetailsArray.map((pokemon) =>
+            axios.get(pokemon.data.species.url)
+          )
+        );
 
-        const speciesDetails = await axios.get(pokemonDetails.data.species.url);
-        const koreanName =
-          speciesDetails.data.names.find(
-            (nameObj) => nameObj.language.name === "ko"
-          )?.name || name;
+        const pokemonData = pokemonDetailsArray.map((pokemon, index) => {
+          const { name, sprites, types, abilities, height, weight } =
+            pokemon.data;
+          const speciesDetails = speciesDetailsArray[index]?.data;
 
-        const descriptionObj =
-          speciesDetails.data.flavor_text_entries.find(
-            (entry) => entry.language.name === "ko" // 한국어 설명 찾기
-          ) ||
-          speciesDetails.data.flavor_text_entries.find(
-            (entry) => entry.language.name === "en" // 한국어 설명이 없으면 영어 설명 사용
-          );
+          if (!speciesDetails) {
+            console.error(`No species details available for ${name}`);
+            return {};
+          }
 
-        const description = descriptionObj
-          ? descriptionObj.flavor_text
-          : "설명이 없습니다.";
+          const koreanName =
+            speciesDetails.names.find(
+              (nameObj) => nameObj.language.name === "ko"
+            )?.name || name;
 
-        pokemonData.push({
-          name,
-          koname: koreanName,
-          image: sprites.front_default,
-          types: types.map((type) => type.type.name),
-          abilities: abilities.map((ability) => ability.ability.name),
-          back_default: sprites.back_default,
-          height: (height / 10).toFixed(1),
-          weight: (weight / 10).toFixed(1),
-          description,
+          const descriptionObj =
+            speciesDetails.flavor_text_entries.find(
+              (entry) => entry.language.name === "ko"
+            ) ||
+            speciesDetails.flavor_text_entries.find(
+              (entry) => entry.language.name === "en"
+            );
+
+          const description = descriptionObj
+            ? descriptionObj.flavor_text
+            : "설명이 없습니다.";
+
+          return {
+            name,
+            koname: koreanName,
+            image: sprites.front_default,
+            types: types.map((type) => type.type.name),
+            abilities: abilities.map((ability) => ability.ability.name),
+            back_default: sprites.back_default,
+            height: (height / 10).toFixed(1),
+            weight: (weight / 10).toFixed(1),
+            description,
+          };
         });
-      }
 
-
-  
-        setPokemonList((prevList) => {const uniquePokemon = pokemonData.slice(0,limit).filter((p) => !prevList.some((prevP) => prevP.name === p.name))
+        setPokemonList((prevList) => {
+          const uniquePokemon = pokemonData
+            .slice(0, limit)
+            .filter((p) => !prevList.some((prevP) => prevP.name === p.name));
           return [...prevList, ...uniquePokemon];
-        })
-          
-             
+        });
+
         if (cachedPokemonList.length === 0) {
           setCachedPokemonList(pokemonData);
         }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-      //  setCachedPokemonList((pokemon) => {const newPokemon = pokemonData.filter((p) => !pokemon.some((prevP) => prevP.name === p.name))
-      //   return [...pokemon, ...newPokemon];
-      //  });  
-
-
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-   fetchData();
-  },[offset]);
-  
+    fetchData();
+  }, [offset]);
 
   //-------------------------------------------------------------------------------
 
@@ -104,8 +109,6 @@ const fetchData = async () => {
         document.documentElement.scrollHeight ===
         document.documentElement.scrollTop + window.innerHeight;
 
-       
-
       if (bottom && !loading) {
         setOffset((prevOffset) => prevOffset + 20);
       }
@@ -113,13 +116,10 @@ const fetchData = async () => {
 
     window.addEventListener("scroll", handleScroll);
 
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [loading]);
-
-
 
   // pokeBox
   const filterPokemon = cachedPokemonList.filter((pokemon) => {
