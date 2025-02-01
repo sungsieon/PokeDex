@@ -6,73 +6,132 @@ import React from "react";
 export default function Pokedex({ changeLanguage, changeBright, inputValue }) {
   const [data, setData] = useState([]);
   const [pokemonList, setPokemonList] = useState([]);
+  const [cachedPokemonList, setCachedPokemonList] = useState([]);
   const [selectedPokemon, setSelectedPokemon] = useState(null);
   const [inner, setInner] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [offset, setOffset] = useState(0);
+  const [limit, setLimit] = useState(20);
+  const [count, setCount] = useState(0);
 
   //pokemon API
+  
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "https://pokeapi.co/api/v2/pokemon?offset=0&limit=151"
-        );
-        const pokeData = response.data;
-        const pokemonUrls = response.data.results;
-        const pokemonData = [];
-        setData(pokeData);
 
-        for (let i = 0; i < pokemonUrls.length; i++) {
-          const pokemonDetails = await axios.get(pokemonUrls[i].url);
-          const { name, sprites, types, abilities, height, weight } = pokemonDetails.data;
+const fetchData = async () => {
+  if (loading) return; // 중복 요청 방지
 
-          const speciesDetails = await axios.get(
-            pokemonDetails.data.species.url
+  setLoading(true);
+
+    try {
+      const response = await axios.get(
+        `https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=150`
+      );
+      const pokeData = response.data;
+      const pokemonUrls = response.data.results;
+      const pokemonData = [];
+
+      for (let i = 0; i < pokemonUrls.length; i++) {
+        const pokemonDetails = await axios.get(pokemonUrls[i].url);
+        const { name, sprites, types, abilities, height, weight } =
+          pokemonDetails.data;
+
+        const speciesDetails = await axios.get(pokemonDetails.data.species.url);
+        const koreanName =
+          speciesDetails.data.names.find(
+            (nameObj) => nameObj.language.name === "ko"
+          )?.name || name;
+
+        const descriptionObj =
+          speciesDetails.data.flavor_text_entries.find(
+            (entry) => entry.language.name === "ko" // 한국어 설명 찾기
+          ) ||
+          speciesDetails.data.flavor_text_entries.find(
+            (entry) => entry.language.name === "en" // 한국어 설명이 없으면 영어 설명 사용
           );
-          const koreanName =
-            speciesDetails.data.names.find(
-              (nameObj) => nameObj.language.name === "ko"
-            )?.name || name;
 
-            const descriptionObj = speciesDetails.data.flavor_text_entries.find(
-              (entry) => entry.language.name === "ko" // 한국어 설명 찾기
-            ) || speciesDetails.data.flavor_text_entries.find(
-              (entry) => entry.language.name === "en" // 한국어 설명이 없으면 영어 설명 사용
-            );
-    
-            const description = descriptionObj ? descriptionObj.flavor_text : "설명이 없습니다.";
+        const description = descriptionObj
+          ? descriptionObj.flavor_text
+          : "설명이 없습니다.";
 
-          pokemonData.push({
-            name,
-            koname: koreanName,
-            image: sprites.front_default,
-            types: types.map((type) => type.type.name),
-            abilities: abilities.map((ability) => ability.ability.name),
-            back_default: sprites.back_default,
-            height: (height/10).toFixed(1),
-            weight: (weight/10).toFixed(1),
-            description,
-          });
+        pokemonData.push({
+          name,
+          koname: koreanName,
+          image: sprites.front_default,
+          types: types.map((type) => type.type.name),
+          abilities: abilities.map((ability) => ability.ability.name),
+          back_default: sprites.back_default,
+          height: (height / 10).toFixed(1),
+          weight: (weight / 10).toFixed(1),
+          description,
+        });
+      }
+
+
+  
+        setPokemonList((prevList) => {const uniquePokemon = pokemonData.slice(0,limit).filter((p) => !prevList.some((prevP) => prevP.name === p.name))
+          return [...prevList, ...uniquePokemon];
+        })
+          
+             
+        if (cachedPokemonList.length === 0) {
+          setCachedPokemonList(pokemonData);
         }
 
-        setPokemonList(pokemonData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
+      //  setCachedPokemonList((pokemon) => {const newPokemon = pokemonData.filter((p) => !pokemon.some((prevP) => prevP.name === p.name))
+      //   return [...pokemon, ...newPokemon];
+      //  });  
+
+
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+   fetchData();
+  },[offset]);
+  
+
+  //-------------------------------------------------------------------------------
+
+  // 2. 스크롤 이벤트 처리
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const bottom =
+        document.documentElement.scrollHeight ===
+        document.documentElement.scrollTop + window.innerHeight;
+
+       
+
+      if (bottom && !loading) {
+        setOffset((prevOffset) => prevOffset + 20);
       }
     };
 
-    fetchData();
-  }, []);
-  //-------------------------------------------------------------------------------
+    window.addEventListener("scroll", handleScroll);
+
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [loading]);
+
+
 
   // pokeBox
-  const filterPokemon = pokemonList.filter((pokemon) => {
+  const filterPokemon = cachedPokemonList.filter((pokemon) => {
     return (
       pokemon.name.toLowerCase().includes(inputValue.toLowerCase()) ||
       pokemon.koname.toLowerCase().includes(inputValue.toLowerCase())
     );
   });
 
-  const pokedexBox = filterPokemon.map((pokemon, index) => {
+  const filteredList = inputValue ? filterPokemon.slice(0, limit) : pokemonList;
+
+  const pokedexBox = filteredList.map((pokemon, index) => {
     const num = index + 1;
 
     const pokeBoxClick = (pokemon, index) => {
@@ -120,23 +179,25 @@ export default function Pokedex({ changeLanguage, changeBright, inputValue }) {
         <span onClick={handleBtn} className="closeBtn">
           X
         </span>
-        <div   className={`
-    ${selectedPokemon.types.includes('grass') ? 'glassBg' :''}
-    ${selectedPokemon.types.includes('fire') ? 'fireBg' : ''}
-    ${selectedPokemon.types.includes('water') ? 'waterBg' : ''}
-    ${selectedPokemon.types.includes('poison') ? 'poisonBg' : ''}
-    ${selectedPokemon.types.includes('psychic') ? 'psychicBg' : ''}
-    ${selectedPokemon.types.includes('electric') ? 'electricBg' : ''}
-    ${selectedPokemon.types.includes('dragon') ? 'dragonBg' : ''}
-    ${selectedPokemon.types.includes('normal') ? 'normalBg' : ''}
-    ${selectedPokemon.types.includes('bug') ? 'bugBg' : ''}
-    ${selectedPokemon.types.includes('ice') ? 'iceBg' : ''}
-    ${selectedPokemon.types.includes('ground') ? 'groundBg' : ''}
-    ${selectedPokemon.types.includes('fairy') ? 'fairyBg' : ''}
-    ${selectedPokemon.types.includes('fighting') ? 'fightingBg' : ''}
-     ${selectedPokemon.types.includes('rock') ? 'rockBg' : ''}
+        <div
+          className={`
+    ${selectedPokemon.types.includes("grass") ? "glassBg" : ""}
+    ${selectedPokemon.types.includes("fire") ? "fireBg" : ""}
+    ${selectedPokemon.types.includes("water") ? "waterBg" : ""}
+    ${selectedPokemon.types.includes("poison") ? "poisonBg" : ""}
+    ${selectedPokemon.types.includes("psychic") ? "psychicBg" : ""}
+    ${selectedPokemon.types.includes("electric") ? "electricBg" : ""}
+    ${selectedPokemon.types.includes("dragon") ? "dragonBg" : ""}
+    ${selectedPokemon.types.includes("normal") ? "normalBg" : ""}
+    ${selectedPokemon.types.includes("bug") ? "bugBg" : ""}
+    ${selectedPokemon.types.includes("ice") ? "iceBg" : ""}
+    ${selectedPokemon.types.includes("ground") ? "groundBg" : ""}
+    ${selectedPokemon.types.includes("fairy") ? "fairyBg" : ""}
+    ${selectedPokemon.types.includes("fighting") ? "fightingBg" : ""}
+     ${selectedPokemon.types.includes("rock") ? "rockBg" : ""}
     // 여기에 다른 속성에 맞는 조건 추가
-  `}>
+  `}
+        >
           <span className="innerNum">
             no.{selectedPokemon ? selectedPokemon.num : ""}
           </span>
@@ -146,7 +207,7 @@ export default function Pokedex({ changeLanguage, changeBright, inputValue }) {
               <img src={selectedPokemon.image} />
             </div>
             <div className="rightImg">
-              <img src={selectedPokemon.back_default} />  
+              <img src={selectedPokemon.back_default} />
             </div>
           </div>
         </div>
@@ -155,13 +216,13 @@ export default function Pokedex({ changeLanguage, changeBright, inputValue }) {
             <div className="typeInformation">
               <span className="infoType">타입</span>
               <div className="typeBox">
-              {selectedPokemon.types.map((type, key) => (
-              <span key={key} className="type2">
-                {type}
-              </span>
-            ))}
-             </div>
-            </div>                            
+                {selectedPokemon.types.map((type, key) => (
+                  <span key={key} className="type2">
+                    {type}
+                  </span>
+                ))}
+              </div>
+            </div>
             <div className="heightInformation">
               <span className="height">키</span>
               <span>{selectedPokemon.height}m</span>

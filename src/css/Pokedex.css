@@ -176,7 +176,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background-color: green;
+  background-color: #cce6cc !important;
 }
 
 .fireBg{
@@ -187,7 +187,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background-color: red;
+  background-color: #ffcccc;
 }
 
 .waterBg{
@@ -198,7 +198,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background-color: blue;
+  background-color:#ccccff;
 }
 
 .poisonBg{
@@ -209,7 +209,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background-color: purple;
+  background-color: #e6cce6;
 }
 
 .psychicBg{
@@ -220,7 +220,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background-color: orange;
+  background-color: #edd4d4;
 }
 
 .electricBg{
@@ -231,7 +231,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background-color: yellow;
+  background-color: #ffffcc;
 }
 
 .dragonBg{
@@ -242,7 +242,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background-color: skyblue;
+  background-color: #ccccff;
 }
 
 .normalBg{  width: 100%;
@@ -252,7 +252,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background-color:brown;
+  background-color:#cccccc;
 }
 
 .bugBg{
@@ -263,7 +263,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background-color: rgb(222, 175, 55);
+  background-color: #cce6cc;
 }
 
 .iceBg{
@@ -274,7 +274,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  background-color: rgb(115, 207, 243);
+  background-color: #ccccff;
 }
 
 .groundBg{
@@ -285,7 +285,7 @@
   justify-content: center;
   flex-direction: column; 
   align-items: center;
-  background-color: rgb(85, 74, 62);
+  background-color: #e6e6e6;
 }
 
 .fairyBg{
@@ -296,7 +296,7 @@
   justify-content: center;
   flex-direction: column; 
   align-items: center;
-  background-color: rgb(224, 145, 245);
+  background-color: #fff2f5;
 }
 
 .fightingBg{
@@ -307,7 +307,7 @@
   justify-content: center;
   flex-direction: column; 
   align-items: center;
-  background-color: rgba(221, 211, 224, 0.767);
+  background-color: #e6e6e6;
 }
 
 .rockBg{
