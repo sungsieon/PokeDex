@@ -1,4 +1,5 @@
 
+![pokedex사진](https://github.com/user-attachments/assets/add2c91f-7c17-4905-8886-6e63a5d5e3cf)
 
 https://pokedex-nine-dusky-97.vercel.app/
 
