@@ -1,74 +1,46 @@
-<<<<<<< HEAD
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![pokedex](https://github.com/user-attachments/assets/8b4b7aba-9c50-412a-90d8-56afb1503aad)
 
-## Available Scripts
+### 기능
 
-In the project directory, you can run:
+- 이름으로 포켓몬 검색 기능
+- 포켓몬 이름 한/영 버튼
+- 어두운 모드 기능
+- 포켓몬에 대한 자세한 정보 창
 
-### `npm start`
+### **개발 기간**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2024.11.24 ~ 2024.11.30
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## **Troubleshooting**
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+웹페이지에 접속 시 150마리의 포켓몬 데이터를 불러오다 보니 렌더링 속도가 너무 느려지는 문제가 있었습니다.  이 문제를 해결하기 위해 Promise.all() 을 사용하여 **비동기 요청을 병렬 처리함으로써** 데이터를 더욱 빠르게 불러오도록 개선했습니다.
 
-### `npm run build`
+이를 통해 대기 시간이 줄어들어 **렌더링 속도가 크게 향상**되었습니다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+그리고 아직 불러오지 않은 포켓몬은 검색 결과에 나타나지 않는 문제가 있었는데,
+**전체 포켓몬 데이터를 한 번에 변수에 저장**하여 **검색은 전체 데이터를 대상으로 수행**하도록 변경해서
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+이 문제를 해결했습니다.
+<br /> <br /> <br />
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+# 다크 모드
+![어두운모드 PNG](https://github.com/user-attachments/assets/2f922d3d-c57e-45da-b716-3517eeaa5151)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+# 포켓몬 이름 한/영 기능
+![한영 PNG](https://github.com/user-attachments/assets/8fe8cda6-22e9-4a1f-80c5-468438935f89)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# 포켓몬 정보 창
+![포켓몬정보 PNG](https://github.com/user-attachments/assets/c40c6595-57a4-4b76-889e-6a3b16d3633f)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-=======
-# PokeDex
->>>>>>> ca8753b67221ea8255d53bdd3ee243e3e59d92e3
+✔ feat → 새로운 기능 추가<br>
+✔ fix → 버그 수정<br>
+✔ docs → 문서 수정 (README 등)<br>
+✔ style → CSS 등 UI 변경 (기능 X)<br>
+✔ refactor → 코드 리팩토링 (기능 변화 X)<br>
+✔ test → 테스트 코드 추가/수정<br>
+✔ chore → 패키지, 설정 변경
