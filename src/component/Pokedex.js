@@ -12,15 +12,17 @@ export default function Pokedex({ changeLanguage, changeBright, inputValue }) {
   const [loading, setLoading] = useState(false);
   const [offset, setOffset] = useState(0);
   const [limit, setLimit] = useState(20);
+  const [loadingCount, setLoadingCount] = useState(true)
   
 
   //pokemon API
 
   useEffect(() => {
     const fetchData = async () => {
-      if (loading) return; // 중복 요청 방지
+      if (loading) return;
 
       setLoading(true);
+      
 
       try {
         const response = await axios.get(
@@ -94,6 +96,8 @@ export default function Pokedex({ changeLanguage, changeBright, inputValue }) {
       } finally {
         setLoading(false);
       }
+
+      setLoadingCount(false);
     };
 
     fetchData();
@@ -141,7 +145,7 @@ export default function Pokedex({ changeLanguage, changeBright, inputValue }) {
     };
 
     return (
-      <>
+      <>   
         <div
           onClick={() => pokeBoxClick(pokemon)}
           className={changeBright ? "blackBox" : "pokedexBox"}
@@ -244,6 +248,7 @@ export default function Pokedex({ changeLanguage, changeBright, inputValue }) {
 
   return (
     <>
+      {loading && loadingCount && <div className="spinner"></div>}
       <div className="pokedex">{pokedexBox}</div>
       <div>{innerBox}</div>
     </>
